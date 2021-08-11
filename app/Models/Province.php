@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Province extends Model
+{
+    use HasFactory;
+    // disabling timestamp property
+    public $timestamps = false;
+    
+    protected $fillable = [
+        'name',
+        'country_code',
+        'region_code',
+    ];
+
+    public function country()
+    {
+        $this->belongsTo(Country::class);
+    }
+
+    public function region()
+    {
+        $this->belongsTo(Region::class);
+    }
+
+    public function municipalities()
+    {
+        $this->hasMany(Municipality::class);
+    }
+
+    public function barangays()
+    {
+        $this->hasMany(Barangay::class);
+    }
+}
